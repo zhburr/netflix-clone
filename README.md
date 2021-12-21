@@ -73,7 +73,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 
 
-##
+## 
 
 FireBase Hosting : https://netflix-clone-6629d.web.app/
 TMDB Api key : 2439b10e4d867671b16a427e5e3633db
+
+## 'convention using'
+fileName : Uppercase for Component and lowercase for the functional file
+
+## 'packages'
+npm install -g firebase-tools
+npm i axios
