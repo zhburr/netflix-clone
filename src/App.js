@@ -1,5 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
+import Row from './Row';
+import requests from './request';
 
 function App() {
   return (
@@ -19,11 +21,16 @@ function App() {
         </a>
       </header> */}
 
-      hey zohaib ur rehman lets learn react js
+      hey lets learn react js
       <p>
         this is nice 
       </p>
       <h2>not very nice</h2>
+
+
+
+      <Row title="NETFLIX ORIGNALS" fetchUrl={requests.fetchNetflixOriginals}/>
+      <Row title="Trending Now" fetchUrl={requests.fetchTrending}/>
     </div>
   );
 }
