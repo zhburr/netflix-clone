@@ -1,27 +1,48 @@
-import React,{useState,useEffect} from 'react'
-import axios from '../axios';
-import requests from '../request';
+import React, { useState, useEffect } from "react";
+import axios from "../axios";
+import requests from "../request";
+import "./Banner.css";
+const imageBaseUrl = "https://image.tmdb.org/t/p/original";
+
 function Banner() {
-    const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState([null]);
 
-    useEffect(() => {
-        async function fetchData() {
-            const request = await axios.get(requests.fetchNetflixOriginals);
-            setMovies(request.data.results);
-            return request;
-        }
-        fetchData();
-    }, [requests.fetchNetflixOriginals]);
+  function truncate(string, maxLength) {
+    return string?.length > maxLength
+      ? string.substr(0, maxLength - 1) + "..."
+      : string;
+  }
 
-    console.log(`movies`, movies);
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get(requests.fetchNetflixOriginals);
+      setMovie(request.data.results[1]);
+      return request;
+    }
+    fetchData();
+  }, [requests.fetchNetflixOriginals]);
 
-    return (
-        <header> {/*<< background image  */}
-        {/* title */}
-        {/* 2 buttons */}
-        {/* description */}
-        </header>
-    )
+  console.log(`movies`, movie);
+  return (
+    <header
+      className="banner"
+      style={{
+        backgroundImage: `url(${imageBaseUrl}${movie.poster_path})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center center",
+      }}
+    >
+      <div className="banner__content">
+        <h1 className="banner__title">{movie.name}</h1>
+        <div className="banner__buttons">
+          <button className="banner__button">PLay</button>
+          <button className="banner__button">My List</button>
+        </div>
+        <h1 className="banner__description">{truncate(movie.overview, 200)}</h1>
+      </div>
+      {/* <div className="banner--fadeBottom"></div> */}
+    </header>
+  );
 }
 
-export default Banner
+export default Banner;
